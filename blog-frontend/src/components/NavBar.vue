@@ -15,15 +15,14 @@
     <!-- 导航主体（手机端默认隐藏，点汉堡展开） -->
     <div class="sidebar-body" @click="menuOpen = false">
       <nav class="sidebar-nav">
-        <router-link to="/" class="nav-item">首页</router-link>
-        <router-link to="/explore" class="nav-item">发现</router-link>
-        <router-link to="/archive" class="nav-item">归档</router-link>
-        <router-link to="/about" class="nav-item">关于</router-link>
+        <router-link to="/" class="nav-item">Arche</router-link>
+        <router-link to="/articles" class="nav-item">文章</router-link>
+        <router-link to="/editor" class="nav-item">创作</router-link>
+        <router-link to="/trajectory" class="nav-item">轨迹</router-link>
       </nav>
 
       <div class="sidebar-footer">
         <template v-if="isLoggedIn">
-          <router-link to="/editor" class="nav-item">写文章</router-link>
           <a href="#" class="nav-item" @click.prevent="logout">退出</a>
         </template>
         <template v-else>
