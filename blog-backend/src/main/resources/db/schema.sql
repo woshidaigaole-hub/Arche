@@ -29,3 +29,13 @@ CREATE TABLE IF NOT EXISTS `article` (
 -- 默认管理员（密码是 123456 的 BCrypt 加密值）
 INSERT INTO `user` (`username`, `password`, `nickname`, `role`, `status`) VALUES
 ('admin', '$2b$10$dAIN4lybP5o0xoG08ehd7u.Q2S3VY2DN/xb9MIvB/muM5uCM110Fe', '博主', 'ADMIN', 1);
+
+-- 画作表
+CREATE TABLE IF NOT EXISTS `artwork` (
+    `id`          BIGINT       NOT NULL AUTO_INCREMENT  COMMENT '主键',
+    `title`       VARCHAR(100) NOT NULL                 COMMENT '画作标题',
+    `create_date` DATE         NOT NULL                 COMMENT '创作日期',
+    `image_path`  VARCHAR(500) NOT NULL                 COMMENT '图片存储路径',
+    `create_time` DATETIME     DEFAULT CURRENT_TIMESTAMP COMMENT '上传时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='画作';

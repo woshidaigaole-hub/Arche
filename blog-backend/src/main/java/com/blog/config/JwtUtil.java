@@ -19,7 +19,7 @@ import java.util.Map;
  *   签名用来防篡改 —— 任何人改了载荷，签名就对不上了
  */
 @Component
-public class JwtUtil {
+public class   JwtUtil {
 
     private final SecretKey key;
     private final long expiration;

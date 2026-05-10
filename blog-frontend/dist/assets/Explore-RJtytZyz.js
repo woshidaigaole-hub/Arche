@@ -1,1 +1,0 @@
-import{_ as a,c as t,a as s,g as c}from"./index-pLUDmBmm.js";const o={},r={class:"placeholder-page"};function l(n,e){return c(),t("div",r,[...e[0]||(e[0]=[s("h1",{class:"page-title"},"发现",-1),s("p",{class:"page-subtitle"},"探索更多内容 —— 即将上线",-1)])])}const _=a(o,[["render",l],["__scopeId","data-v-9a6b72fb"]]);export{_ as default};

@@ -71,10 +71,10 @@ const formatDate = (dateStr) => {
 
 .section-label {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--color-text-soft);
-  letter-spacing: 3px;
+  color: var(--color-text);
+  letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-sm);
@@ -89,7 +89,7 @@ const formatDate = (dateStr) => {
   padding: var(--space-lg);
   margin-bottom: var(--space-md);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: 8px;
   background: var(--color-surface);
   transition: border-color 0.15s ease;
 }
@@ -116,7 +116,7 @@ const formatDate = (dateStr) => {
 .card {
   padding: var(--space-md) var(--space-lg);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: 8px;
   background: var(--color-surface);
   transition: border-color 0.15s ease;
 }
@@ -150,6 +150,7 @@ const formatDate = (dateStr) => {
 .empty {
   grid-column: 1 / -1;
   color: var(--color-text-soft);
+  font-size: 14px;
   text-align: center;
   padding: var(--space-xl) 0;
 }

@@ -1,6 +1,14 @@
 <template>
   <div class="articles-page">
-    <h2 class="section-label">文章</h2>
+    <h2 class="section-label">
+      <img class="section-icon" src="/book-icon.png" alt="" width="18" height="18" />
+      文章
+    </h2>
+
+    <div v-if="isLoggedIn" class="action-bar">
+      <router-link to="/editor" class="btn">+ 写文章</router-link>
+    </div>
+
     <div class="article-list">
       <article v-for="article in articles" :key="article.id" class="card">
         <router-link :to="`/article/${article.id}`">
@@ -21,6 +29,7 @@
 import { ref, onMounted } from 'vue'
 import { articleApi } from '../api/index.js'
 
+const isLoggedIn = ref(!!localStorage.getItem('token'))
 const articles = ref([])
 
 onMounted(async () => {
@@ -48,14 +57,38 @@ const formatDate = (dateStr) => {
 
 .section-label {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
-  color: var(--color-text-soft);
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  color: var(--color-text);
+  letter-spacing: 1px;
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-sm);
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-icon {
+  flex-shrink: 0;
+}
+
+.action-bar {
+  margin-bottom: var(--space-md);
+}
+
+.btn {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn:hover {
+  border-color: var(--color-text-soft);
 }
 
 .article-list {
@@ -67,7 +100,7 @@ const formatDate = (dateStr) => {
 .card {
   padding: var(--space-md) var(--space-lg);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: 8px;
   background: var(--color-surface);
   transition: border-color 0.15s ease;
 }
@@ -78,7 +111,7 @@ const formatDate = (dateStr) => {
 .card-title {
   font-family: var(--font-sans);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.4;
   margin-bottom: var(--space-xs);
   letter-spacing: -0.3px;
@@ -86,7 +119,7 @@ const formatDate = (dateStr) => {
 
 .card-summary {
   color: var(--color-text-soft);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7;
   margin-bottom: var(--space-sm);
   display: -webkit-box;
@@ -104,6 +137,7 @@ const formatDate = (dateStr) => {
 
 .empty {
   color: var(--color-text-soft);
+  font-size: 16px;
   text-align: center;
   padding: var(--space-xl) 0;
 }

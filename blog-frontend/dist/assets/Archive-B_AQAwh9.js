@@ -1,1 +1,0 @@
-import{_ as a,c,a as s,g as t}from"./index-pLUDmBmm.js";const o={},r={class:"placeholder-page"};function l(n,e){return t(),c("div",r,[...e[0]||(e[0]=[s("h1",{class:"page-title"},"归档",-1),s("p",{class:"page-subtitle"},"按时间线浏览所有文章 —— 即将上线",-1)])])}const p=a(o,[["render",l],["__scopeId","data-v-5c4306c3"]]);export{p as default};

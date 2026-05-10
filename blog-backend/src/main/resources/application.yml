@@ -2,12 +2,16 @@
 server:
   port: 8080
 
-# MySQL 数据源 —— 把 blog_db 改成你本地实际数据库名
+# MySQL 数据源 + 文件上传
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/blog_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: 13960020950
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 # MyBatis-Plus 配置
 mybatis-plus:
@@ -17,6 +21,10 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto  # 主键自增
+
+# 上传目录（相对于工作目录，部署时一起搬走即可）
+app:
+  upload-dir: ./uploads/
 
 # JWT 密钥 & 过期时间
 jwt:

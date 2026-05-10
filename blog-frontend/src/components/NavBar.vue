@@ -16,8 +16,7 @@
     <div class="sidebar-body" @click="menuOpen = false">
       <nav class="sidebar-nav">
         <router-link to="/" class="nav-item">Arche</router-link>
-        <router-link to="/articles" class="nav-item">文章</router-link>
-        <router-link to="/editor" class="nav-item">创作</router-link>
+        <router-link to="/creation" class="nav-item">创作</router-link>
         <router-link to="/trajectory" class="nav-item">轨迹</router-link>
       </nav>
 
@@ -59,7 +58,7 @@ const logout = () => {
   flex-direction: column;
   padding: var(--space-lg) var(--space-md);
   border-right: 1px solid var(--color-border);
-  background: var(--color-surface);
+  background: #f7f7f3;
 }
 
 /* 手机端顶部条：桌面端隐藏 */
@@ -81,6 +80,13 @@ const logout = () => {
   flex-direction: column;
   gap: var(--space-xs);
   flex: 1;
+}
+
+.sidebar-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .sidebar-footer {
@@ -163,7 +169,7 @@ const logout = () => {
   .sidebar-body {
     display: none;
     padding: 0 var(--space-md) var(--space-md);
-    background: var(--color-surface);
+    background: #f7f7f3;
     border-bottom: 1px solid var(--color-border);
   }
   /* 汉堡激活时展开 */

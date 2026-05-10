@@ -27,10 +27,17 @@ public class WebConfig implements WebMvcConfigurer {
         // 注意：GET /api/articles 放行，但 POST/PUT /api/articles 在 Controller 里单独验
     }
 
+    // 让上传的图片可以通过 /uploads/xxx.jpg 直接访问
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:./uploads/");
+    }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173")  // Vue 开发服务器的地址
+                .allowedOrigins("http://localhost:5173", "https://yejinqiao.com")  // Vue 开发服务器的地址 + 生产域名
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);
