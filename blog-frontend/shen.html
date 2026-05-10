@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>代办清单</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .done { text-decoration: line-through; color: gray; }
+        li { margin: 10px 0; cursor: pointer; }
+    </style>
+</head>
+<body>
+<h1>代办清单</h1>
+
+<input type="text" id="todoinput" placeholder="输入新任务">
+<button onclick="addTodo()">添加任务</button>
+<ul id="todolist">
+
+</ul>
+
+<script>
+    let todos=[
+        {text:"学习JavaScript",completed:false},
+        {text:"做一个代办清单",completed:false}
+    ];
+
+    function display(){
+        let list=document.getElementById("todolist");
+        list.innerHTML="";
+        for(let i=0;i<todos.length;i++){
+            let todo=todos[i];
+            let li= document.createElement("li");
+            li.
+        }
+    }
+
+    function addTodo(){
+        let input =document.getElementById("todoinput");
+        let text=input.value;
+
+        if(text ===""){
+            alert("请输入任务内容！");
+            return;
+        }
+
+        todos.push({text:text,completed:false});
+
+    }
+</script>
+</body>
+</html>

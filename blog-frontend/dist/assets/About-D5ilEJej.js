@@ -1,0 +1,1 @@
+import{_ as t,c as a,a as s,g as c}from"./index-pLUDmBmm.js";const o={},r={class:"placeholder-page"};function l(n,e){return c(),a("div",r,[...e[0]||(e[0]=[s("h1",{class:"page-title"},"关于",-1),s("p",{class:"page-subtitle"},"Arche —— 用文字刻下思考的痕迹",-1)])])}const d=t(o,[["render",l],["__scopeId","data-v-7d446f00"]]);export{d as default};
