@@ -11,7 +11,7 @@
 
     <div class="article-list">
       <article v-for="article in articles" :key="article.id" class="card">
-        <router-link :to="`/article/${article.id}`">
+        <router-link :to="`/article/${article.id}`" class="card-link">
           <h3 class="card-title">{{ article.title }}</h3>
           <p class="card-summary">{{ article.summary || article.content.slice(0, 150) + '...' }}</p>
           <div class="card-meta">
@@ -19,6 +19,11 @@
             <span>{{ formatDate(article.createTime) }}</span>
           </div>
         </router-link>
+        <button
+          v-if="canDelete(article)"
+          class="delete-btn"
+          @click="handleDelete(article)"
+        >删除</button>
       </article>
       <p v-if="articles.length === 0" class="empty">暂无文章。</p>
     </div>
@@ -32,14 +37,41 @@ import { articleApi } from '../api/index.js'
 const isLoggedIn = ref(!!localStorage.getItem('token'))
 const articles = ref([])
 
-onMounted(async () => {
+const parseToken = () => {
+  const token = localStorage.getItem('token')
+  if (!token) return null
+  try {
+    const payload = token.split('.')[1]
+    return JSON.parse(atob(payload))
+  } catch { return null }
+}
+const tokenPayload = parseToken()
+
+const canDelete = (article) => {
+  if (!tokenPayload) return false
+  return article.authorId === tokenPayload.userId || tokenPayload.role === 'ADMIN'
+}
+
+const fetchArticles = async () => {
   try {
     const res = await articleApi.list()
     articles.value = res.data.data
   } catch (e) {
     console.error('加载文章失败', e)
   }
-})
+}
+
+onMounted(fetchArticles)
+
+const handleDelete = async (article) => {
+  if (!confirm(`确定删除《${article.title}》？`)) return
+  try {
+    await articleApi.remove(article.id)
+    articles.value = articles.value.filter(a => a.id !== article.id)
+  } catch (e) {
+    alert(e.response?.data?.message || '删除失败')
+  }
+}
 
 const formatDate = (dateStr) => {
   if (!dateStr) return ''
@@ -98,6 +130,9 @@ const formatDate = (dateStr) => {
 }
 
 .card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: var(--space-md) var(--space-lg);
   border: 1px solid var(--color-border);
   border-radius: 8px;
@@ -106,6 +141,11 @@ const formatDate = (dateStr) => {
 }
 .card:hover {
   border-color: var(--color-text-soft);
+}
+
+.card-link {
+  flex: 1;
+  min-width: 0;
 }
 
 .card-title {
@@ -133,6 +173,24 @@ const formatDate = (dateStr) => {
   gap: var(--space-md);
   font-size: 13px;
   color: var(--color-text-soft);
+}
+
+.delete-btn {
+  flex-shrink: 0;
+  margin-left: var(--space-md);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.delete-btn:hover {
+  color: #d44;
+  border-color: #d44;
 }
 
 .empty {

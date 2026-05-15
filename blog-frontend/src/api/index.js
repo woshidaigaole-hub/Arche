@@ -10,7 +10,7 @@ const api = axios.create({
   timeout: 10000         // 10秒超时
 })
 
-// 请求拦截器：每次发请求前，自动把 token 加到请求头
+// 请求拦截器：每次发请求前，自动把 token 加到请  求头
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -38,6 +38,7 @@ export const articleApi = {
   detail:   (id)         => api.get(`/articles/${id}`),
   create:   (data)       => api.post('/articles', data),
   update:   (id, data)   => api.put(`/articles/${id}`, data),
+  remove:   (id)         => api.delete(`/articles/${id}`),
 }
 
 export const authApi = {

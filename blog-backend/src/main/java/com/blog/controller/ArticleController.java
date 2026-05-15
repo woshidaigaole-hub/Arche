@@ -79,4 +79,22 @@ public class ArticleController {
             return Result.fail(403, e.getMessage());
         }
     }
+
+    /**
+     * 删除文章 —— DELETE /api/articles/{id}（需登录，且是作者本人或管理员）
+     */
+    @DeleteMapping("/{id}")
+    public Result<?> delete(@PathVariable Long id, HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("userId");
+        String role = (String) request.getAttribute("role");
+        if (userId == null) {
+            return Result.fail(401, "请先登录");
+        }
+        try {
+            articleService.delete(id, userId, role);
+            return Result.ok("删除成功");
+        } catch (RuntimeException e) {
+            return Result.fail(403, e.getMessage());
+        }
+    }
 }

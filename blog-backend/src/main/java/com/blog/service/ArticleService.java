@@ -76,4 +76,18 @@ public class ArticleService {
         updated.setId(articleId);
         articleMapper.updateById(updated);
     }
+
+    /**
+     * 删除文章 —— 校验同更新：作者本人或管理员
+     */
+    public void delete(Long articleId, Long currentUserId, String currentRole) {
+        Article existing = articleMapper.selectById(articleId);
+        if (existing == null) {
+            throw new RuntimeException("文章不存在");
+        }
+        if (!existing.getAuthorId().equals(currentUserId) && !"ADMIN".equals(currentRole)) {
+            throw new RuntimeException("无权删除此文章");
+        }
+        articleMapper.deleteById(articleId);
+    }
 }
